@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,30 +26,62 @@ import com.sabin.esoftwarica.R;
 import com.sabin.esoftwarica.ui.Contacts;
 import com.sabin.esoftwarica.ui.ContactsAdapter;
 import com.sabin.esoftwarica.ui.home.HomeFragment;
+import com.sabin.esoftwarica.ui.notifications.NotificationsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardFragment extends Fragment implements View.OnClickListener {
+public class DashboardFragment extends Fragment implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
 
     private EditText etfname, etage, etaddress;
-    private RadioButton rdomale, rdofemale, rdoother;
+    private RadioButton male, female, rdoother;
     private Button btnsave;
+    RadioGroup gender;
 
+    public static List<Student> details = new ArrayList<>();
+
+    String uname,uage,ugender,uaddress;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+        btnsave = view.findViewById(R.id.submit);
+
+
+
         etfname = view.findViewById(R.id.fname);
         etage = view.findViewById(R.id.etage);
         etaddress = view.findViewById(R.id.etaddress);
-        btnsave = view.findViewById(R.id.btns);
+        gender = view.findViewById(R.id.gender);
+        male= view.findViewById(R.id.male);
+        female= view.findViewById(R.id.female);
+        rdoother = view.findViewById(R.id.other);
         btnsave.setOnClickListener(this);
+        gender.setOnCheckedChangeListener(this);
         return view;
     }
+
+
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int i) {
+        if (i == R.id.male) {
+            ugender = "Male";
+            Toast.makeText(getContext(), "Male", Toast.LENGTH_SHORT).show();
+        }
+        if (i == R.id.female) {
+            ugender = "Female";
+            Toast.makeText(getContext(), "Female", Toast.LENGTH_SHORT).show();
+        }
+        if (i == R.id.other) {
+            ugender = "Other";
+            Toast.makeText(getContext(), "Other", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -66,24 +99,17 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
             etaddress.requestFocus();
             return;
         }
-
-        if(v.getId() ==R.id.btns) {
-
-
-            String name, age, address;
-            name = etfname.getText().toString();
-            age = etage.getText().toString();
-            address = etaddress.getText().toString();
-
-//            HomeFragment.contactsList.add(new Contacts(name,age,address));
-            Toast.makeText(getContext(),"Students Details Addedd", Toast.LENGTH_SHORT).show();
+        else if(TextUtils.isEmpty(ugender)) {
+            Toast.makeText(getContext(), "Select Gender", Toast.LENGTH_SHORT).show();
+            return;
 
         }
-//        final List<Contacts> contactsList = new ArrayList<>();
-//        contactsList.add(new Contacts("name","age","Male","address",R.drawable.men,""));
-//        final ContactsAdapter contactsAdapter = new ContactsAdapter(getContext(), contactsList);
-//        recyclerView.setAdapter(contactsAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+            uname = etfname.getText().toString();
+            uage = etage.getText().toString();
+            uaddress = etaddress.getText().toString();
+            details.add(new Student(uname,uage,ugender,uaddress));
+            Toast.makeText(getContext(),"Students Details Addedd", Toast.LENGTH_SHORT).show();
 
 
     }

@@ -48,28 +48,28 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rdog">
+        android:id="@+id/gender">
 
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Male"
             android:textSize="30sp"
-            android:id="@+id/rdomale"
+            android:id="@+id/male"
             />
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Female"
             android:textSize="30sp"
-            android:id="@+id/rdofemale"
+            android:id="@+id/female"
             />
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Other"
             android:textSize="30sp"
-            android:id="@+id/rdoother"
+            android:id="@+id/other"
 
             />
     </RadioGroup>
@@ -88,7 +88,7 @@
 
 
 <Button
-    android:id="@+id/btns"
+    android:id="@+id/submit"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="30sp"

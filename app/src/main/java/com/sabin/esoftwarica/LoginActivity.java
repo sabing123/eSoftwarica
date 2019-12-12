@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (Objects.equals(Uname, "softwarica") && Objects.equals(psw, "coventry")) {
                     Toast.makeText(getApplicationContext(),
-                            "Redirecting...", Toast.LENGTH_SHORT).show();
+                            "Login...", Toast.LENGTH_SHORT).show();
 
                     Intent dashboard = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(dashboard);

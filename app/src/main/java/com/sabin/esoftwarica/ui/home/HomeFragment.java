@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sabin.esoftwarica.R;
 import com.sabin.esoftwarica.ui.ContactsAdapter;
 import com.sabin.esoftwarica.ui.Contacts;
+import com.sabin.esoftwarica.ui.dashboard.DashboardFragment;
+import com.sabin.esoftwarica.ui.dashboard.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
 public static List<Contacts> contactsList  = new ArrayList<>();
+List<Student> students = new ArrayList<>();
      private RecyclerView recyclerView;
 
 
@@ -31,19 +34,25 @@ public static List<Contacts> contactsList  = new ArrayList<>();
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+
         recyclerView = view.findViewById(R.id.recyclerview);
+if(HomeFragment.contactsList.isEmpty()) {
+    final List<Contacts> contactsList = new ArrayList<>();
+    contactsList.add(new Contacts("Sabin", "20", "Male", "Kalanki", R.drawable.men, ""));
+    contactsList.add(new Contacts("Arya", "30", "Female", " Kathmandu", R.drawable.women, ""));
+    contactsList.add(new Contacts("John", "30", "other", "Nepal", R.drawable.other, ""));
 
+    final ContactsAdapter contactsAdapter = new ContactsAdapter(getContext(), contactsList);
+    recyclerView.setAdapter(contactsAdapter);
+    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+}else {
+    Student student = new Student(getContext(), students);
+    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
 
-        final List<Contacts> contactsList = new ArrayList<>();
-        contactsList.add(new Contacts("Sabin","20","Male","Kalanki",R.drawable.men,""));
-        contactsList.add(new Contacts("Namaskar","30","Female","",R.drawable.women,""));
-        contactsList.add(new Contacts("Appiii","30","other","No Place",R.drawable.other,""));
+    recyclerView.setLayoutManager(layoutManager);
+}
 
-
-
-        final ContactsAdapter contactsAdapter = new ContactsAdapter(getContext(), contactsList);
-        recyclerView.setAdapter(contactsAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return view;
 
