@@ -19,6 +19,8 @@ public class Contacts {
 
     }
 
+
+
     public int getImageId() { return imageId; }
     public void setImageId(int imageId) { this.imageId = imageId; }
 

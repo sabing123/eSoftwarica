@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,9 +22,9 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
+public static List<Contacts> contactsList  = new ArrayList<>();
+     private RecyclerView recyclerView;
 
-    private RecyclerView recyclerView;
-private Button btndelte;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -32,10 +33,14 @@ private Button btndelte;
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = view.findViewById(R.id.recyclerview);
 
+
         final List<Contacts> contactsList = new ArrayList<>();
         contactsList.add(new Contacts("Sabin","20","Male","Kalanki",R.drawable.men,""));
         contactsList.add(new Contacts("Namaskar","30","Female","",R.drawable.women,""));
         contactsList.add(new Contacts("Appiii","30","other","No Place",R.drawable.other,""));
+
+
+
         final ContactsAdapter contactsAdapter = new ContactsAdapter(getContext(), contactsList);
         recyclerView.setAdapter(contactsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
